@@ -1,3 +1,5 @@
+include ':csj'
+include ':core'
 include ':module_ad'
 include ':app'
 rootProject.name = "Admodule"

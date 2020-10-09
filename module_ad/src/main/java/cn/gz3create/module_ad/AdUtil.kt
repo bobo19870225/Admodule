@@ -17,8 +17,6 @@ import com.ifmvo.togetherad.csj.CsjProvider
 import com.ifmvo.togetherad.csj.TogetherAdCsj
 import java.lang.ref.WeakReference
 
-//import com.ifmvo.togetherad.gdt.GdtProvider
-
 
 class AdUtil private constructor() {
     //    private val tAg = "SplashActivity"
@@ -111,7 +109,7 @@ class AdUtil private constructor() {
          *
          * 也可以在请求广告前设置，实时生效
          */
-        TogetherAd.setPublicProviderRadio(mapOf(
+        TogetherAd.setPublicProviderRatio(mapOf(
                 AdProviderType.GDT.type to 1,
                 AdProviderType.BAIDU.type to 1,
                 AdProviderType.CSJ.type to 1
@@ -226,7 +224,7 @@ class AdUtil private constructor() {
          * container: 必传。请求到广告之后会自动添加到 container 这个布局中展示。
          * listener: 非必传。如果你不需要监听结果可以不传或传空。各个回调方法也可以选择性添加
          */
-        WeakActivity.get()?.let { AdHelperSplash.show(activity = it, alias = TogetherAdAlias.AD_SPLASH, radioMap = radioMapSplash, container = container, listener = listener) }
+        WeakActivity.get()?.let { AdHelperSplash.show(activity = it, alias = TogetherAdAlias.AD_SPLASH, radioMapSplash, container = container, listener = listener) }
     }
 
     companion object {

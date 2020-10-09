@@ -33,11 +33,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation project(path: ':core')
+    implementation project(path: ':csj')
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //穿山甲（ 头条 ）
-    api('com.matthewchen.togetherad:csj:3.1.7-3.1.1.1')
+//    api('com.matthewchen.togetherad:csj:3.1.9-3.2.5.1')
     //优量汇（ 腾讯广点通 ）
 //        api('com.matthewchen.togetherad:gdt:3.1.7-4.211.1081')
     //百青藤 ( 百度 Mob )
