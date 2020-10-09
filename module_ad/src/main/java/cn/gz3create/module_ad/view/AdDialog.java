@@ -23,7 +23,7 @@ import cn.gz3create.module_ad.TogetherAdAlias;
  * description:自定义dialog
  */
 
-public class CommonDialog extends Dialog {
+public class AdDialog extends Dialog {
     /**
      * 显示的图片
      */
@@ -51,7 +51,7 @@ public class CommonDialog extends Dialog {
     private WeakReference<Activity> weakReferenceAT;
     private BannerListener bannerListener;
 
-    public CommonDialog(Activity activity, BannerListener bannerListener) {
+    public AdDialog(Activity activity, BannerListener bannerListener) {
         super(activity, R.style.CustomDialog);
         weakReferenceAT = new WeakReference<>(activity);
         this.bannerListener = bannerListener;
@@ -149,11 +149,12 @@ public class CommonDialog extends Dialog {
 
     @Override
     public void show() {
+        super.show();
         Activity activity = weakReferenceAT.get();
         if (activity != null && bannerListener != null) {
+//            AdHelperBanner.INSTANCE.
             AdHelperBanner.INSTANCE.show(activity, TogetherAdAlias.AD_BANNER, adContainer, bannerListener);
         }
-        super.show();
         refreshView();
     }
 
@@ -175,7 +176,7 @@ public class CommonDialog extends Dialog {
      */
     public OnClickBottomListener onClickBottomListener;
 
-    public CommonDialog setOnClickBottomListener(OnClickBottomListener onClickBottomListener) {
+    public AdDialog setOnClickBottomListener(OnClickBottomListener onClickBottomListener) {
         this.onClickBottomListener = onClickBottomListener;
         return this;
     }
@@ -196,7 +197,7 @@ public class CommonDialog extends Dialog {
         return message;
     }
 
-    public CommonDialog setMessage(String message) {
+    public AdDialog setMessage(String message) {
         this.message = message;
         return this;
     }
@@ -205,7 +206,7 @@ public class CommonDialog extends Dialog {
         return title;
     }
 
-    public CommonDialog setTitle(String title) {
+    public AdDialog setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -214,7 +215,7 @@ public class CommonDialog extends Dialog {
         return positive;
     }
 
-    public CommonDialog setPositive(String positive) {
+    public AdDialog setPositive(String positive) {
         this.positive = positive;
         return this;
     }
@@ -223,7 +224,7 @@ public class CommonDialog extends Dialog {
         return negtive;
     }
 
-    public CommonDialog setNegtive(String negtive) {
+    public AdDialog setNegtive(String negtive) {
         this.negtive = negtive;
         return this;
     }
@@ -236,12 +237,12 @@ public class CommonDialog extends Dialog {
         return isSingle;
     }
 
-    public CommonDialog setSingle(boolean single) {
+    public AdDialog setSingle(boolean single) {
         isSingle = single;
         return this;
     }
 
-    public CommonDialog setImageResId(int imageResId) {
+    public AdDialog setImageResId(int imageResId) {
         this.imageResId = imageResId;
         return this;
     }

@@ -110,7 +110,6 @@ class CsjProvider : BaseAdProvider() {
 
         //期望个性化模板广告view的size,单位dp
         internal var expressViewWidth = 300F
-
         internal var expressViewHeight = 50F
         fun setImageAcceptedSize(width: Int, height: Int) {
             imageAcceptedSizeWidth = width
@@ -139,51 +138,7 @@ class CsjProvider : BaseAdProvider() {
                 .setAdCount(1) //请求广告数量为1到3条
                 .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) //期望个性化模板广告view的size,单位dp
                 .build()
-//object : TTAdNative.BannerAdListener {
-//            override fun onBannerAdLoad(bannerAd: TTBannerAd?) {
-//                if (bannerAd == null) {
-//                    callbackBannerFailed(adProviderType, listener, "请求成功，但是返回的 bannerAd 为空")
-//                    return
-//                }
-//
-//                val bannerView = bannerAd.bannerView
-//                if (bannerView == null) {
-//                    callbackBannerFailed(adProviderType, listener, "请求成功，但是返回的 bannerView 为空")
-//                    return
-//                }
-//
-//                callbackBannerLoaded(adProviderType, listener)
-//
-//                bannerAd.setSlideIntervalTime(Banner.slideIntervalTime)
-//                container.removeAllViews()
-//                container.addView(bannerView)
-//
-//                bannerAd.setBannerInteractionListener(object : TTBannerAd.AdInteractionListener {
-//                    override fun onAdClicked(view: View?, type: Int) {
-//                        callbackBannerClicked(adProviderType, listener)
-//                    }
-//
-//                    override fun onAdShow(view: View?, type: Int) {
-//                        callbackBannerExpose(adProviderType, listener)
-//                    }
-//                })
-//
-//                bannerAd.setShowDislikeIcon(object : TTAdDislike.DislikeInteractionCallback {
-//                    override fun onSelected(position: Int, value: String?) {
-//                        container.removeAllViews()
-//                        callbackBannerClosed(adProviderType, listener)
-//                    }
-//
-//                    override fun onCancel() {}
-//                    override fun onRefuse() {}
-//                })
-//            }
-//
-//            override fun onError(errorCode: Int, errorMsg: String?) {
-//                "onError".loge(TAG)
-//                callbackBannerFailed(adProviderType, listener, "错误码：$errorCode, 错误信息：$errorMsg")
-//            }
-//        }
+
         TTAdSdk.getAdManager().createAdNative(activity).loadBannerExpressAd(adSlot, object : TTAdNative.NativeExpressAdListener {
             override fun onError(errorCode: Int, errorMsg: String?) {
                 "onError".loge(TAG)
