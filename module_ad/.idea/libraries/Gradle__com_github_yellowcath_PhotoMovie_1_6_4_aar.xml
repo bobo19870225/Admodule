@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.yellowcath:PhotoMovie:1.6.4@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/823254fecee42f0be48820b15eaae400/jetified-PhotoMovie-1.6.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/823254fecee42f0be48820b15eaae400/jetified-PhotoMovie-1.6.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/823254fecee42f0be48820b15eaae400/jetified-PhotoMovie-1.6.4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yellowcath/PhotoMovie/1.6.4/f4e71d66c98e554308269060cb4099e83db0bdaa/PhotoMovie-1.6.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

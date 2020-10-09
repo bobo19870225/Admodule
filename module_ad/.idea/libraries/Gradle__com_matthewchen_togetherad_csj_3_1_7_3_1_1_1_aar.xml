@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.matthewchen.togetherad:csj:3.1.7-3.1.1.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a2e998a1f2d8d52613a942ce1c627c3a/jetified-csj-3.1.7-3.1.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a2e998a1f2d8d52613a942ce1c627c3a/jetified-csj-3.1.7-3.1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a2e998a1f2d8d52613a942ce1c627c3a/jetified-csj-3.1.7-3.1.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a2e998a1f2d8d52613a942ce1c627c3a/jetified-csj-3.1.7-3.1.1.1/jars/libs/adhost.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a2e998a1f2d8d52613a942ce1c627c3a/jetified-csj-3.1.7-3.1.1.1/jars/libs/r-classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.matthewchen.togetherad/csj/3.1.7-3.1.1.1/884740f341e794619c7045cfce5dfbcda2bdfc00/csj-3.1.7-3.1.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.matthewchen.togetherad/csj/3.1.7-3.1.1.1/34c425c2aecb0a588b063b8778007b08b523c558/csj-3.1.7-3.1.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

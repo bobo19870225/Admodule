@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_init">未初始化，请根据文档进行初始化：https://github.com/ifmvo/TogetherAd/blob/master/doc/prepare.md</string>
+</resources>

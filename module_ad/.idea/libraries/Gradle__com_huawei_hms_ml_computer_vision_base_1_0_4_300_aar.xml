@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.huawei.hms:ml-computer-vision-base:1.0.4.300@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a395e96d245081245a753a3dc4745367/jetified-ml-computer-vision-base-1.0.4.300/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a395e96d245081245a753a3dc4745367/jetified-ml-computer-vision-base-1.0.4.300/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a395e96d245081245a753a3dc4745367/jetified-ml-computer-vision-base-1.0.4.300/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

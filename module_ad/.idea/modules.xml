@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1775562258/IdPhoto.iml" filepath="$PROJECT_DIR$/.idea/modules/1775562258/IdPhoto.iml" group="IdPhoto" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-638599359/androids.iml" filepath="$PROJECT_DIR$/.idea/modules/-638599359/androids.iml" group="IdPhoto/androids" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2059562148/app.iml" filepath="$PROJECT_DIR$/.idea/modules/2059562148/app.iml" group="IdPhoto/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1401805898/doodle.iml" filepath="$PROJECT_DIR$/.idea/modules/-1401805898/doodle.iml" group="IdPhoto/doodle" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_ad.iml" filepath="$PROJECT_DIR$/.idea/modules/module_ad.iml" group="IdPhoto/module_ad" />
+    </modules>
+  </component>
+</project>

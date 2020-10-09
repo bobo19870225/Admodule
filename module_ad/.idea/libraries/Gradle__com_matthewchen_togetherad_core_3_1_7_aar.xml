@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.matthewchen.togetherad:core:3.1.7@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/702ce1f89731298c590815548a1642a8/jetified-core-3.1.7/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/702ce1f89731298c590815548a1642a8/jetified-core-3.1.7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/702ce1f89731298c590815548a1642a8/jetified-core-3.1.7/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.matthewchen.togetherad/core/3.1.7/f17c3ac2253e557b7e2898c15a1ff9ac08ee2dea/core-3.1.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.matthewchen.togetherad/core/3.1.7/ce78f491f584659591c399a9f8cde1758ccf1dfc/core-3.1.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

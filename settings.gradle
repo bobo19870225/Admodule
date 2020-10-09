@@ -1,0 +1,3 @@
+include ':module_ad'
+include ':app'
+rootProject.name = "Admodule"
