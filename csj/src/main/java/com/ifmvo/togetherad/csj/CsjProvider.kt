@@ -1,6 +1,7 @@
 package com.ifmvo.togetherad.csj
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.bytedance.sdk.openadsdk.*
@@ -12,6 +13,7 @@ import com.ifmvo.togetherad.core.utils.loge
 import com.ifmvo.togetherad.core.utils.logi
 import com.ifmvo.togetherad.csj.CsjProvider.Banner.expressViewHeight
 import com.ifmvo.togetherad.csj.CsjProvider.Banner.expressViewWidth
+import com.ifmvo.togetherad.csj.CsjProvider.Banner.slideIntervalTime
 
 
 /**
@@ -21,6 +23,8 @@ import com.ifmvo.togetherad.csj.CsjProvider.Banner.expressViewWidth
  */
 class CsjProvider : BaseAdProvider() {
 
+
+    private var adView: View? = null
     private val TAG = "CsjProvider"
     private var mTTAd: TTNativeExpressAd? = null
 
@@ -44,6 +48,7 @@ class CsjProvider : BaseAdProvider() {
             imageAcceptedSizeHeight = height
         }
     }
+
 
     override fun showSplashAd(activity: Activity, adProviderType: String, alias: String, container: ViewGroup, listener: SplashListener) {
 
@@ -103,6 +108,7 @@ class CsjProvider : BaseAdProvider() {
 
         var supportDeepLink: Boolean = true
 
+
         //图片的宽高
         internal var imageAcceptedSizeWidth = 600
 
@@ -110,6 +116,7 @@ class CsjProvider : BaseAdProvider() {
 
         //期望个性化模板广告view的size,单位dp
         internal var expressViewWidth = 300F
+
         internal var expressViewHeight = 50F
         fun setImageAcceptedSize(width: Int, height: Int) {
             imageAcceptedSizeWidth = width
@@ -122,28 +129,29 @@ class CsjProvider : BaseAdProvider() {
         }
 
         //Banner 刷新间隔时间
-        var slideIntervalTime = 30 * 1000
+        var slideIntervalTime = 3 * 1000
     }
 
-    override fun showBannerAd(activity: Activity, adProviderType: String, alias: String, container: ViewGroup, listener: BannerListener) {
-
+    //    var ads: MutableList<TTNativeExpressAd>? = null
+    private var listener: BannerListener? = null
+    private var adProviderType: String? = null
+    override fun preloadingBanner(activity: Activity, adProviderType: String, alias: String, listener: BannerListener) {
+        this@CsjProvider.adProviderType = adProviderType
+        this@CsjProvider.listener = listener
         callbackBannerStartRequest(adProviderType, listener)
-
         destroyBannerAd()
-
         val adSlot = AdSlot.Builder()
                 .setCodeId(TogetherAdCsj.idMapCsj[alias]) //广告位id
                 .setSupportDeepLink(Banner.supportDeepLink)
                 .setImageAcceptedSize(Banner.imageAcceptedSizeWidth, Banner.imageAcceptedSizeHeight)//这个参数设置即可，不影响个性化模板广告的size
-                .setAdCount(1) //请求广告数量为1到3条
+                .setAdCount(3) //请求广告数量为1到3条
                 .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) //期望个性化模板广告view的size,单位dp
                 .build()
-
         TTAdSdk.getAdManager().createAdNative(activity).loadBannerExpressAd(adSlot, object : TTAdNative.NativeExpressAdListener {
             override fun onError(errorCode: Int, errorMsg: String?) {
                 "onError".loge(TAG)
                 callbackBannerFailed(adProviderType, listener, "错误码：$errorCode, 错误信息：$errorMsg")
-                container.removeAllViews()
+//                container.removeAllViews()
             }
 
             override fun onNativeExpressAdLoad(ads: MutableList<TTNativeExpressAd>?) {
@@ -151,18 +159,30 @@ class CsjProvider : BaseAdProvider() {
                     callbackBannerFailed(adProviderType, listener, "请求成功，但是返回的 bannerAd 为空")
                     return
                 }
+                callbackBannerLoaded(adProviderType, listener)
                 mTTAd = ads[0]
-                mTTAd!!.setSlideIntervalTime(30 * 1000)
-                bindAdListener(mTTAd!!, container, adProviderType, listener)
-                mTTAd!!.render();//调用render开始渲染广告
-//                startTime = System.currentTimeMillis()
-//                //TToast.show(mContext, "load success!")
+                mTTAd?.let {
+                    it.setSlideIntervalTime(slideIntervalTime)
+                    bindAdListener(it, adProviderType, listener)
+                    it.render();//调用render开始渲染广告
+                }
             }
 
         })
+        //step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
+        TTAdSdk.getAdManager().requestPermissionIfNecessary(activity)
     }
 
-    private fun bindAdListener(ad: TTNativeExpressAd, container: ViewGroup, adProviderType: String, listener: BannerListener) {
+
+    override fun showBannerAd(container: ViewGroup) {
+        adView?.let {
+            container.removeAllViews()
+            container.addView(it)
+        }
+    }
+
+
+    private fun bindAdListener(ad: TTNativeExpressAd, adProviderType: String, listener: BannerListener) {
         ad.setExpressInteractionListener(object : ExpressAdInteractionListener {
             override fun onAdClicked(view: View, type: Int) {
                 callbackBannerClicked(adProviderType, listener)
@@ -177,11 +197,11 @@ class CsjProvider : BaseAdProvider() {
             }
 
             override fun onRenderSuccess(view: View, width: Float, height: Float) {
-//                Log.e("ExpressView", "render suc:" + (System.currentTimeMillis() - startTime))
+                Log.e("ExpressView", "render suc:")
                 //返回view的宽高 单位 dp
-                //TToast.show(mContext, "渲染成功")
-                container.removeAllViews()
-                container.addView(view)
+                adView = view
+//                container.removeAllViews()
+//                container.addView(view)
             }
         })
         //dislike设置

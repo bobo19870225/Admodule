@@ -78,7 +78,7 @@ class AdUtil private constructor() {
                 TogetherAdAlias.AD_NATIVE_RECYCLERVIEW to "901121737",
                 TogetherAdAlias.AD_BANNER to "945534047",
                 TogetherAdAlias.AD_INTER to "901121725",
-                TogetherAdAlias.AD_REWARD to "901121365",
+                TogetherAdAlias.AD_REWARD to "945535284",
                 TogetherAdAlias.AD_SPLASH_HYBRID to "901121737"//id是原生类型
         )
 

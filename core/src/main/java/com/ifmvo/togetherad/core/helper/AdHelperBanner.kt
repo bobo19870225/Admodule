@@ -20,18 +20,14 @@ object AdHelperBanner : BaseHelper() {
 
     private var adProvider: BaseAdProvider? = null
 
-    //为了照顾 Java 调用的同学
-    fun show(@NotNull activity: Activity, @NotNull alias: String, @NotNull container: ViewGroup, listener: BannerListener? = null) {
-        show(activity, alias, null, container, listener)
+
+    fun show(@NotNull container: ViewGroup) {
+//        startTimer(listener)
+        realShow(container)
     }
 
-    fun show(@NotNull activity: Activity, @NotNull alias: String, ratioMap: Map<String, Int>? = null, @NotNull container: ViewGroup, listener: BannerListener? = null) {
+    fun preloading(@NotNull activity: Activity, @NotNull alias: String, ratioMap: Map<String, Int>? = null, listener: BannerListener? = null) {
         startTimer(listener)
-        realShow(activity, alias, ratioMap, container, listener)
-    }
-
-    private fun realShow(@NotNull activity: Activity, @NotNull alias: String, ratioMap: Map<String, Int>? = null, @NotNull container: ViewGroup, listener: BannerListener? = null) {
-
         val currentRatioMap = if (ratioMap?.isEmpty() != false) TogetherAd.getPublicProviderRatio() else ratioMap
 
         val adProviderType = AdRandomUtil.getRandomAdProvider(currentRatioMap)
@@ -41,17 +37,16 @@ object AdHelperBanner : BaseHelper() {
             listener?.onAdFailedAll()
             return
         }
-
-        adProvider = AdProviderLoader.loadAdProvider(adProviderType)
-
+        if (adProvider == null) {
+            adProvider = AdProviderLoader.loadAdProvider(adProviderType)
+        }
         if (adProvider == null) {
             "$adProviderType ${activity.getString(R.string.no_init)}".loge()
             val newRatioMap = filterType(currentRatioMap, adProviderType)
-            realShow(activity, alias, newRatioMap, container, listener)
+            preloading(activity, alias, newRatioMap, listener)
             return
         }
-
-        adProvider?.showBannerAd(activity = activity, adProviderType = adProviderType, alias = alias, container = container, listener = object : BannerListener {
+        adProvider?.preloadingBanner(activity = activity, adProviderType = adProviderType, alias = alias, listener = object : BannerListener {
             override fun onAdStartRequest(providerType: String) {
                 listener?.onAdStartRequest(adProviderType)
             }
@@ -67,8 +62,8 @@ object AdHelperBanner : BaseHelper() {
                 if (isFetchOverTime) return
 
                 listener?.onAdFailed(providerType, failedMsg)
-                val newRatioMap = filterType(currentRatioMap, adProviderType)
-                realShow(activity, alias, newRatioMap, container, listener)
+//                val newRatioMap = filterType(currentRatioMap, adProviderType)
+//                realShow(container)
             }
 
             override fun onAdClicked(providerType: String) {
@@ -83,6 +78,10 @@ object AdHelperBanner : BaseHelper() {
                 listener?.onAdClose(providerType)
             }
         })
+    }
+
+    private fun realShow(container: ViewGroup) {
+        adProvider?.showBannerAd(container)
     }
 
     fun destroy() {

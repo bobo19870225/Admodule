@@ -5,12 +5,9 @@ import android.view.ViewGroup
 import com.ifmvo.togetherad.core.listener.*
 import org.jetbrains.annotations.NotNull
 
-/* 
- *
- * 
- * Created by Matthew Chen on 2020-04-03.
- */
+
 interface IAdProvider {
+
 
     /**
      * 开屏广告
@@ -23,16 +20,12 @@ interface IAdProvider {
             @NotNull listener: SplashListener//回调
     )
 
+    fun preloadingBanner(activity: Activity, adProviderType: String, alias: String, listener: BannerListener)
+
     /**
      * Banner 广告
      */
-    fun showBannerAd(
-            @NotNull activity: Activity,
-            @NotNull adProviderType: String,
-            @NotNull alias: String,
-            @NotNull container: ViewGroup,
-            @NotNull listener: BannerListener
-    )
+    fun showBannerAd(container: ViewGroup)
 
     //销毁 Banner 广告
     fun destroyBannerAd()

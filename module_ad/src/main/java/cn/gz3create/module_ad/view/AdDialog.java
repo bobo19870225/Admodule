@@ -11,12 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ifmvo.togetherad.core.helper.AdHelperBanner;
-import com.ifmvo.togetherad.core.listener.BannerListener;
-
-import java.lang.ref.WeakReference;
 
 import cn.gz3create.module_ad.R;
-import cn.gz3create.module_ad.TogetherAdAlias;
 
 
 /**
@@ -48,13 +44,11 @@ public class AdDialog extends Dialog {
      * 按钮之间的分割线
      */
     private View columnLineView;
-    private WeakReference<Activity> weakReferenceAT;
-    private BannerListener bannerListener;
+    protected Activity activity;
 
-    public AdDialog(Activity activity, BannerListener bannerListener) {
+    public AdDialog(Activity activity) {
         super(activity, R.style.CustomDialog);
-        weakReferenceAT = new WeakReference<>(activity);
-        this.bannerListener = bannerListener;
+        this.activity = activity;
     }
 
     /**
@@ -64,7 +58,7 @@ public class AdDialog extends Dialog {
     private String title;
     private String positive, negtive;
     private int imageResId = -1;
-
+    protected ImageView close;
     /**
      * 底部是否只有一个按钮
      */
@@ -101,6 +95,7 @@ public class AdDialog extends Dialog {
                 onClickBottomListener.onNegtiveClick();
             }
         });
+        close.setOnClickListener(v -> dismiss());
     }
 
     /**
@@ -150,18 +145,14 @@ public class AdDialog extends Dialog {
     @Override
     public void show() {
         super.show();
-        Activity activity = weakReferenceAT.get();
-        if (activity != null && bannerListener != null) {
-//            AdHelperBanner.INSTANCE.
-            AdHelperBanner.INSTANCE.show(activity, TogetherAdAlias.AD_BANNER, adContainer, bannerListener);
-        }
+        AdHelperBanner.INSTANCE.show(adContainer);
         refreshView();
     }
 
     /**
      * 初始化界面控件
      */
-    private void initView() {
+    protected void initView() {
         negtiveBn = (Button) findViewById(R.id.negtive);
         positiveBn = (Button) findViewById(R.id.positive);
         titleTv = (TextView) findViewById(R.id.title);
@@ -169,6 +160,7 @@ public class AdDialog extends Dialog {
         imageIv = (ImageView) findViewById(R.id.image);
         columnLineView = findViewById(R.id.column_line);
         adContainer = findViewById(R.id.adContainer);
+        close = findViewById(R.id.close);
     }
 
     /**
@@ -249,8 +241,6 @@ public class AdDialog extends Dialog {
 
     @Override
     public void dismiss() {
-        //销毁，避免内存泄漏
-        AdHelperBanner.INSTANCE.destroy();
         super.dismiss();
     }
 }
