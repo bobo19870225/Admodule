@@ -5,6 +5,11 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import cn.gz3create.module_ad.AdUtil.AdKey.appName
+import cn.gz3create.module_ad.AdUtil.AdKey.csjAD_BANNER
+import cn.gz3create.module_ad.AdUtil.AdKey.csjAD_REWARD
+import cn.gz3create.module_ad.AdUtil.AdKey.csjAD_SPLASH
+import cn.gz3create.module_ad.AdUtil.AdKey.csjAdAppId
 import com.bumptech.glide.Glide
 import com.bytedance.sdk.openadsdk.BuildConfig
 import com.google.android.gms.ads.*
@@ -20,15 +25,24 @@ import java.lang.ref.WeakReference
 
 
 class AdUtil private constructor() {
-    //    private val tAg = "SplashActivity"
+    object AdKey {
+        const val gg: String = "谷歌"
+        const val ggTest: String = "谷歌测试"
+        const val appName: String = "应用名称"
+        const val csjAdAppId: String = "穿山甲广告ID"
+        const val csjAD_SPLASH: String = "穿山甲开屏广告ID"
+        const val csjAD_BANNER: String = "穿山甲Banner广告ID"
+        const val csjAD_REWARD: String = "穿山甲激励广告ID"
+    }
+
     private lateinit var interstitialAd: InterstitialAd
     private var INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-6377156563409469/5921704117"
-    fun adInit(context: Context, appName: String) {
+    fun adInit(context: Context, appNameAndKey: Map<String, String>) {
         interstitialAd = InterstitialAd(context)
-        if (BuildConfig.DEBUG) {
-            //    测试
-            INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712"
-        }
+//        if (BuildConfig.DEBUG) {
+//            //    测试
+//            INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712"
+//        }
         interstitialAd.adUnitId = INTERSTITIAL_AD_UNIT_ID
 
 
@@ -64,7 +78,11 @@ class AdUtil private constructor() {
 //        TogetherAdCsj.customController = object : TTCustomController() {}
 
         //初始化穿山甲
-        TogetherAdCsj.init(context = context, adProviderType = AdProviderType.CSJ.type, csjAdAppId = "5108569", appName = appName)
+        val appName = appNameAndKey[appName]
+        val csjAdAppId = appNameAndKey[csjAdAppId]
+        appName?.let {
+            csjAdAppId?.let { it1 -> TogetherAdCsj.init(context = context, adProviderType = AdProviderType.CSJ.type, csjAdAppId = it1, appName = it) }
+        }
         //初始化广点通
 //        TogetherAdGdt.init(context = context, adProviderType = AdProviderType.GDT.type, gdtAdAppId = "1101152570")
         //初始化百青藤
@@ -73,15 +91,21 @@ class AdUtil private constructor() {
         /**
          * 配置所有广告位ID
          */
-        TogetherAdCsj.idMapCsj = mapOf(
-                TogetherAdAlias.AD_SPLASH to "887385801",
-                TogetherAdAlias.AD_NATIVE_SIMPLE to "901121737",
-                TogetherAdAlias.AD_NATIVE_RECYCLERVIEW to "901121737",
-                TogetherAdAlias.AD_BANNER to "945513004",
-                TogetherAdAlias.AD_INTER to "901121725",
-                TogetherAdAlias.AD_REWARD to "945537269",
-                TogetherAdAlias.AD_SPLASH_HYBRID to "901121737"//id是原生类型
-        )
+        val csjAD_SPLASH = appNameAndKey[csjAD_SPLASH]
+        val csjAD_BANNER = appNameAndKey[csjAD_BANNER]
+        val csjAD_REWARD = appNameAndKey[csjAD_REWARD]
+        csjAD_SPLASH?.let {
+            TogetherAdCsj.idMapCsj = mapOf(
+                    TogetherAdAlias.AD_SPLASH to csjAD_SPLASH,
+                    TogetherAdAlias.AD_NATIVE_SIMPLE to "901121737",
+                    TogetherAdAlias.AD_NATIVE_RECYCLERVIEW to "901121737",
+                    TogetherAdAlias.AD_BANNER to csjAD_BANNER!!,
+                    TogetherAdAlias.AD_INTER to "901121725",
+                    TogetherAdAlias.AD_REWARD to csjAD_REWARD!!,
+                    TogetherAdAlias.AD_SPLASH_HYBRID to "901121737"//id是原生类型
+            )
+
+        }
 
 //        TogetherAdGdt.idMapGDT = mapOf(
 //                TogetherAdAlias.AD_SPLASH to "8863364436303842593",
