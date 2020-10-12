@@ -55,7 +55,7 @@ public class AdDialog extends Dialog {
      * 都是内容数据
      */
     private String message;
-    private String title;
+    private String title = "温馨提示";
     private String positive, negtive;
     private int imageResId = -1;
     protected ImageView close;
@@ -239,8 +239,5 @@ public class AdDialog extends Dialog {
         return this;
     }
 
-    @Override
-    public void dismiss() {
-        super.dismiss();
-    }
+
 }

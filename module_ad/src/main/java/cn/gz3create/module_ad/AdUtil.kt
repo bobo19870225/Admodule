@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bytedance.sdk.openadsdk.BuildConfig
 import com.google.android.gms.ads.*
 import com.ifmvo.togetherad.core.TogetherAd
 import com.ifmvo.togetherad.core.custom.flow.AdImageLoader
@@ -24,10 +25,10 @@ class AdUtil private constructor() {
     private var INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-6377156563409469/5921704117"
     fun adInit(context: Context, appName: String) {
         interstitialAd = InterstitialAd(context)
-//        if (BuildConfig.DEBUG) {
-//            //    测试
-//            INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712"
-//        }
+        if (BuildConfig.DEBUG) {
+            //    测试
+            INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712"
+        }
         interstitialAd.adUnitId = INTERSTITIAL_AD_UNIT_ID
 
 
@@ -63,7 +64,7 @@ class AdUtil private constructor() {
 //        TogetherAdCsj.customController = object : TTCustomController() {}
 
         //初始化穿山甲
-        TogetherAdCsj.init(context = context, adProviderType = AdProviderType.CSJ.type, csjAdAppId = "5109683", appName = appName)
+        TogetherAdCsj.init(context = context, adProviderType = AdProviderType.CSJ.type, csjAdAppId = "5108569", appName = appName)
         //初始化广点通
 //        TogetherAdGdt.init(context = context, adProviderType = AdProviderType.GDT.type, gdtAdAppId = "1101152570")
         //初始化百青藤
@@ -73,12 +74,12 @@ class AdUtil private constructor() {
          * 配置所有广告位ID
          */
         TogetherAdCsj.idMapCsj = mapOf(
-                TogetherAdAlias.AD_SPLASH to "887387422",
+                TogetherAdAlias.AD_SPLASH to "887385801",
                 TogetherAdAlias.AD_NATIVE_SIMPLE to "901121737",
                 TogetherAdAlias.AD_NATIVE_RECYCLERVIEW to "901121737",
-                TogetherAdAlias.AD_BANNER to "945534047",
+                TogetherAdAlias.AD_BANNER to "945513004",
                 TogetherAdAlias.AD_INTER to "901121725",
-                TogetherAdAlias.AD_REWARD to "945535284",
+                TogetherAdAlias.AD_REWARD to "945537269",
                 TogetherAdAlias.AD_SPLASH_HYBRID to "901121737"//id是原生类型
         )
 

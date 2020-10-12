@@ -13,9 +13,12 @@ import androidx.annotation.NonNull;
 import cn.gz3create.module_ad.view.AdDialog;
 
 public class VipDialog extends AdDialog {
+    private String alias;
+    private Map<String, Integer> ratioMap;
+    private RewardListener listener;
+
     public VipDialog(@NonNull Activity activity) {
         super(activity);
-//        loadAd(alias, ratioMap, listener);
     }
 
     private OnVIPClickListener onVIPClickListener;
@@ -28,6 +31,9 @@ public class VipDialog extends AdDialog {
 
     //必须先调用这个方法
     public void loadAd(String alias, Map<String, Integer> ratioMap, RewardListener listener) {
+        this.alias = alias;
+        this.ratioMap = ratioMap;
+        this.listener = listener;
         if (adHelperReward == null) {
             adHelperReward = new AdHelperReward(activity, alias, ratioMap, listener);
         }
@@ -39,18 +45,20 @@ public class VipDialog extends AdDialog {
         super.initView();
         close.setVisibility(View.VISIBLE);
         setNegtive("查看广告");
-        setPositive("开通VIP");
+        setPositive("取消");
         setOnClickBottomListener(new OnClickBottomListener() {
             @Override
             public void onPositiveClick() {
                 if (onVIPClickListener != null) {
                     onVIPClickListener.onClick();
                 }
+                dismiss();
             }
 
             @Override
             public void onNegtiveClick() {
                 adHelperReward.show();
+                dismiss();
             }
         });
     }
@@ -66,4 +74,12 @@ public class VipDialog extends AdDialog {
         void onClick();
     }
 
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        if (adHelperReward == null) {
+            adHelperReward = new AdHelperReward(activity, alias, ratioMap, listener);
+        }
+        adHelperReward.load();
+    }
 }
