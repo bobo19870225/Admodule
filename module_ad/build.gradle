@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
@@ -26,11 +26,29 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-}
 
+}
+MobSDK {
+    SMSSDK {}
+    MobPush {}
+//        谷歌上架去掉的权限
+    permissions {
+        exclude "android.permission.READ_SMS", "android.permission.RECEIVE_SMS", "android.permission.READ_CONTACTS"
+    }
+
+}
 dependencies {
-    api files('libs/scyh_account-release.aar')
     implementation fileTree(dir: "libs", include: ["*.jar"])
+//  user
+    api files('libs/scyh_account-release.aar')
+    //友盟统计SDK 主模块加 maven { url 'https://dl.bintray.com/umsdk/release' }
+    implementation 'com.umeng.umsdk:asms:1.1.3'
+    // asms包依赖(必选) 主模块加 maven { url 'https://jitpack.io' }
+    implementation 'com.umeng.umsdk:crash:0.0.5' // native crash包依赖(必选)
+    implementation('com.github.open-android:RoundedImageView:v1.0.0')
+    implementation('com.alibaba:fastjson:1.2.73')
+    implementation('com.github.wildma:PictureSelector:1.2.0')
+//    end user
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -39,13 +57,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    //穿山甲（ 头条 ）
-//    api('com.matthewchen.togetherad:csj:3.1.9-3.2.5.1')
-    //优量汇（ 腾讯广点通 ）
-//        api('com.matthewchen.togetherad:gdt:3.1.7-4.211.1081')
-    //百青藤 ( 百度 Mob )
-//        api('com.matthewchen.togetherad:baidu:3.1.7-5.85')
-//        谷歌
+
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
     implementation('com.google.android.gms:play-services-ads:19.4.0')
