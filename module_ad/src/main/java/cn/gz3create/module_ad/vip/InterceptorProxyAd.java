@@ -26,7 +26,7 @@ public class InterceptorProxyAd implements InvocationHandler {
 
         return Proxy.newProxyInstance(target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
-                new InterceptorProxyAd(target, "cn.gz3create.module_ad.vip.MyInterceptor"));
+                new InterceptorProxyAd(target, "cn.gz3create.module_ad.vip.AdInterceptor"));
     }
 
     @Override

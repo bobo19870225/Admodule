@@ -7,7 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import cn.gz3create.scyh_account.ScyhAccountLib;
 import cn.gz3create.scyh_account.utils.LibUtils;
 
-public interface DefaultRewardListenerImp extends DefaultBaseListenerImp , RewardListener {
+public interface DefaultRewardListenerImp extends DefaultBaseListenerImp, RewardListener {
+
+
     @Override
     default void onAdLoaded(@NotNull String providerType) {
 
